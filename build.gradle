@@ -1,8 +1,9 @@
 plugins {
-	id 'idea'
-	id 'java'
-	id 'org.springframework.boot' version '3.5.6'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'idea'
+    id 'java'
+    id 'org.springframework.boot' version '4.0.1'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.flywaydb.flyway' version '11.20.0'
 }
 
 group = 'com.algaworks.algashop'
@@ -26,34 +27,32 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('springCloudVersion', "2025.0.0")
-}
-
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	// Short-lived service: inclui o starter-web mas exclui o Tomcat embutido.
-	// Sem o Tomcat, a aplicação não inicia um servidor HTTP e não fica "escutando" requisições.
-	// Isso faz com que o Spring Boot encerre o processo automaticamente após executar o ApplicationRunner,
-	// tornando o serviço efêmero — ideal para tarefas agendadas via CronJob (ex: Kubernetes).
-	implementation ('org.springframework.boot:spring-boot-starter-web') {
-        exclude group: 'org:springframework.boot', module: 'spring-boot-starter-tomcat'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-restclient'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // Short-lived service: inclui o starter-web mas exclui o Tomcat embutido.
+    // Sem o Tomcat, a aplicação não inicia um servidor HTTP e não fica "escutando" requisições.
+    // Isso faz com que o Spring Boot encerre o processo automaticamente após executar o ApplicationRunner,
+    // tornando o serviço efêmero — ideal para tarefas agendadas via CronJob (ex: Kubernetes).
+    implementation ('org.springframework.boot:spring-boot-starter-webmvc') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
-	runtimeOnly 'org.postgresql:postgresql'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok'
-	mockitoAgent('org.mockito:mockito-core:5.14.2') {transitive = false}
-}
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-	}
+    runtimeOnly 'org.postgresql:postgresql'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-jdbc-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-restclient-test'
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    mockitoAgent('org.mockito:mockito-core:5.21.0') {transitive = false}
 }
 
 tasks.named('test') {

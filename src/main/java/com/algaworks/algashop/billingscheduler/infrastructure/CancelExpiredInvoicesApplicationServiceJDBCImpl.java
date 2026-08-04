@@ -133,7 +133,10 @@ public class CancelExpiredInvoicesApplicationServiceJDBCImpl implements CancelEx
                         ps.setObject(3, invoiceProjection.getId());
                    }
            );
-           log.info("Invoice canceled IDs {}", invoices);
+           // invoicesCanceled, nao invoices: so entram aqui as faturas cujo cancelamento
+           // o gateway aceitou. Logar a lista original faria este log anunciar faturas
+           // que nao foram canceladas, contradizendo o total logo abaixo.
+           log.info("Invoice canceled IDs {}", invoicesCanceled);
            return invoicesCanceled.size();
         } catch (DataAccessException e) {
            // Captura falha no batch inteiro — se o batchUpdate falhar, nenhuma fatura do lote é cancelada
