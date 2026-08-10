@@ -1,3 +1,15 @@
 spring:
   datasource:
+    # 5432, nao 5433: 5433 e a porta PUBLICADA no host. Dentro da rede do compose
+    # quem responde e a porta do container.
     url: jdbc:postgresql://algashop-postgres:5432/billing
+
+algashop:
+  integrations:
+    payment:
+      fastpay:
+        # O grupo 'docker' e base + development-env + docker-env, e development-env
+        # traz localhost:9995. Dentro do container localhost e o PROPRIO container -
+        # sem esta linha o FastpayPaymentAPIClient falha em toda chamada.
+        # O token continua herdado de development-env.
+        hostname: http://fastpay:9995
