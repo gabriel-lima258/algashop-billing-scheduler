@@ -157,7 +157,7 @@ A base é `eclipse-temurin:25-jre`, acompanhando o toolchain do `build.gradle`. 
 
 Caderno de estudos do projeto: [`algashop-docs`](https://github.com/gabriel-lima258/algashop-docs).
 
-- [Jobs agendados](https://github.com/gabriel-lima258/algashop-docs/blob/main/04-infraestrutura/scheduled-jobs.md) — `@Scheduled`, execução distribuída e controle de concorrência
-- [Arquitetura](https://github.com/gabriel-lima258/algashop-docs/blob/main/00-visao-geral/arquitetura.md) — onde este serviço se encaixa, e a exceção que ele abre à regra de banco por serviço
-- [Ambiente local](https://github.com/gabriel-lima258/algashop-docs/blob/main/04-infraestrutura/ambiente-local.md) — portas, bancos e problemas comuns
-- [Docker](https://github.com/gabriel-lima258/algashop-docs/blob/main/04-infraestrutura/docker.md) — build de imagem e multi-arquitetura
+- [Jobs agendados](https://github.com/gabriel-lima258/algashop-docs/blob/main/04-infraestrutura/04-scheduled-jobs.md) — `@Scheduled`, execução distribuída e controle de concorrência
+- [Arquitetura](https://github.com/gabriel-lima258/algashop-docs/blob/main/00-visao-geral/01-arquitetura.md) — onde este serviço se encaixa, e a exceção que ele abre à regra de banco por serviço
+- [Ambiente local](https://github.com/gabriel-lima258/algashop-docs/blob/main/04-infraestrutura/01-ambiente-local.md) — portas, bancos e problemas comuns
+- [Docker](https://github.com/gabriel-lima258/algashop-docs/blob/main/04-infraestrutura/02-docker.md) — build de imagem e multi-arquitetura
